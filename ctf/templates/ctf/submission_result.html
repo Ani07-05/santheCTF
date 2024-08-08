@@ -1,0 +1,14 @@
+<!-- templates/ctf/submission_result.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Submission Result for {{ submissions.0.challenge.title }}</h1>
+<ul>
+    {% for submission in submissions %}
+    <li>
+        Submitted Flag: {{ submission.flag_submitted }} - {% if submission.is_correct %}Correct{% else %}Incorrect{% endif %}
+    </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'home' %}">Back to Home</a>
+{% endblock %}

@@ -1,0 +1,14 @@
+<!-- templates/ctf/challenge_detail.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ challenge.title }}</h1>
+<p>{{ challenge.description }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    <label for="flag">Flag:</label>
+    <input type="text" name="flag" id="flag" required>
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RVU Santhe Mini-CTF</title>
+    
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <nav>
+        {% if user.is_authenticated %}
+            <span>Welcome, {{ user.username }}!</span>
+            <span>Your Points: {{ user_profile.total_points }}</span> <!-- Display the user's points -->
+            <a href="{% url 'leaderboard' %}">Leaderboard</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a> SantheMiniCTF <a href="{% url 'signup' %}">Sign Up</a>
+        {% endif %}
+    </nav>
+    <div class="container">
+        {% block content %}
+        <div class="challenge-list">
+            {% for challenge in challenges %}
+            <div class="challenge-item">
+                <h3>{{ challenge.title }}</h3>
+                <p>{{ challenge.description }}</p>
+                {% if challenge in solved_challenges %}
+                    <button disabled>Challenge already solved</button>
+                {% else %}
+                    <a href="{% url 'challenge_detail' challenge.pk %}">
+                        <button>Solve</button>
+                    </a>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% endblock %}
+    </div>
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{% if message.tags %}{{ message.tags }}{% endif %}">
+                {{ message }}
+            </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>
