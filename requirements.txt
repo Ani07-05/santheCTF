@@ -1,8 +1,8 @@
-Django==4.2.1
+Django==5.1
 gunicorn==21.2.0
 psycopg2-binary==2.9.6  # PostgreSQL adapter for Django
 requests==2.30.0
 SQLAlchemy==2.0.15
 django-allauth==0.52.0
-django-csp==3.5.0  # Check for the latest version if needed
+django-csp==3.8 # Check for the latest version if needed
 six>=1.15.0
