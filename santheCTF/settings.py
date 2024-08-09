@@ -10,12 +10,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-#oz*b5txvch86^&xs^^gqwuv7!b5ei)il&$f4gaoa0=@&lv_i7"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['santhectf.onrender.com', 'yourdomain.com', 'localhost']
 
 # Application definition
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -38,8 +37,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "allauth.account.middleware.AccountMiddleware",  # Added middleware
-    'csp.middleware.CSPMiddleware',  # Added middleware
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = "santheCTF.urls"
@@ -64,7 +62,6 @@ WSGI_APPLICATION = "santheCTF.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
@@ -74,7 +71,6 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -92,31 +88,26 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
-
 LANGUAGE_CODE = "en-us"
-
 TIME_ZONE = "UTC"
-
 USE_I18N = True
-
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
-
-STATIC_URL = "static/"
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Enable SSL redirection
-SECURE_SSL_REDIRECT = False
+SECURE_SSL_REDIRECT = True
 
 # Ensure cookies are only sent via HTTPS
-CSRF_COOKIE_SECURE = False
-SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 # Clickjacking protection
 X_FRAME_OPTIONS = 'DENY'
@@ -126,6 +117,8 @@ SECURE_BROWSER_XSS_FILTER = True
 
 # Set HSTS headers
 SECURE_HSTS_SECONDS = 3600
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
 
 SITE_ID = 1
 
