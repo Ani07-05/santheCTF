@@ -1,14 +1,46 @@
-<!-- templates/ctf/challenge_detail.html -->
-{% extends 'base.html' %}
+{% extends 'ctf/base.html' %}
 
 {% block content %}
-<h1>{{ challenge.title }}</h1>
-<p>{{ challenge.description }}</p>
-
-<form method="post">
-    {% csrf_token %}
-    <label for="flag">Flag:</label>
-    <input type="text" name="flag" id="flag" required>
-    <button type="submit">Submit</button>
-</form>
+<div class="challenge-detail-container">
+    <div class="challenge-header">
+        <h1 class="challenge-title">{{ challenge.title }}</h1>
+        <div class="challenge-meta">
+            <span class="challenge-points">{{ challenge.points }} pts</span>
+        </div>
+    </div>
+    
+    <div class="challenge-content">
+        <div class="challenge-description">
+            <h3>Description</h3>
+            <p>{{ challenge.description }}</p>
+        </div>
+        
+        <div class="flag-submission">
+            <form method="post" class="flag-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="flag" class="flag-label">Enter Flag:</label>
+                    <div class="input-group">
+                        <input type="text" name="flag" id="flag" 
+                               placeholder="flag{...}" 
+                               class="flag-input" 
+                               required
+                               autocomplete="off">
+                        <button type="submit" class="submit-btn">
+                            <span class="btn-text">Submit</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        <div class="challenge-actions">
+            <a href="{% url 'home' %}" class="back-btn">
+                <span class="btn-icon">←</span>
+                <span class="btn-text">Back to Challenges</span>
+            </a>
+        </div>
+    </div>
+</div>
 {% endblock %}

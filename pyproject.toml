@@ -1,0 +1,53 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "santhectf"
+version = "0.1.0"
+description = "A Django-based Capture The Flag (CTF) platform"
+authors = ["Your Name <your.email@example.com>"]
+readme = "README.md"
+packages = [{include = "ctf"}, {include = "santheCTF"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+Django = "^4.2"
+django-allauth = "^64.0.0"
+gunicorn = "^21.2.0"
+psycopg2 = "^2.9.6"
+whitenoise = "^6.7.0"
+six = "^1.16.0"
+django-csp = "^3.8"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.0.0"
+flake8 = "^6.0.0"
+pytest = "^7.0.0"
+pytest-django = "^4.0.0"
+coverage = "^7.0.0"
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+  | migrations
+)/
+'''
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "santheCTF.settings"
+python_files = ["tests.py", "test_*.py", "*_tests.py"]
+addopts = "--tb=short --strict-markers"
+testpaths = ["ctf/tests.py"]
